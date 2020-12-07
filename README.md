@@ -42,4 +42,3 @@ I'm gathering data directly from Postman's API. This can be viewed [from here](h
 
 ### What next?
 Since this was just a small project, I don't have anything else on my mind. I can expand this by adding vue-router logic and add more informative pages in the future, but I will consider that for later.
-I will try to add responsive UI in the future - however table-structures are never good with Mobile so perhaps that would be waste of time in this case.
