@@ -9,10 +9,10 @@
       <li v-for="link in this.links" :key="link.title" class="singleLink">
         <a v-bind:href="link.url"> {{ link.title }} </a>
       </li>
-      <li v-if="this.langOptions" class="languageWrapper" >
+      <li v-if="this.langOptions" class="languageWrapper">
         <ul class="languageList">
-          <li v-for="langOption in this.langOptions" :key="langOption.key" >
-            <a @click="updateLanguage(langOption.key)"> <img :src="langOption.image" :class="{ activeLanguage: isActive(langOption.key) }"/></a>
+          <li v-for="langOption in this.langOptions" :key="langOption.key">
+            <a @click="updateLanguage(langOption.key)"> <img :src="langOption.image" :class="{ activeLanguage: isActive(langOption.key) }" /></a>
           </li>
         </ul>
       </li>
@@ -46,8 +46,8 @@ export default {
     updateLanguage(selected) {
       this.$emit('languageUpdate', selected);
     },
-    isActive( lang ){
-      if( this.language == lang ){
+    isActive(lang) {
+      if (this.language == lang) {
         return true
       } else {
         return false
@@ -167,8 +167,8 @@ li {
   margin-bottom: 1rem;
 }
 
-.languageSelectWrapper{
-    width: 9rem;
+.languageSelectWrapper {
+  width: 9rem;
 }
 
 .languageFlag {
@@ -176,7 +176,7 @@ li {
   height: 2rem;
 }
 
-.languageList{
+.languageList {
   width: 2rem;
 }
 
@@ -184,8 +184,50 @@ li {
   cursor: pointer;
 }
 
-.activeLanguage{
-    box-shadow: 0px 2px 16px rgb(255 255 255 / 41%);
+.activeLanguage {
+  box-shadow: 0px 2px 16px rgb(255 255 255 / 41%);
 }
 
+@media only screen and (max-width: 600px) {
+  .inner_header h1 {
+    font-size: 1rem;
+  }
+
+
+
+  .logo_container {
+    width: 20%;
+    margin-left: 10%;
+  }
+
+  .inner_header {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .navigation {
+    width: 30%;
+    margin: 0;
+    padding: 0;
+    margin-top: 5%;
+    float: right;
+  }
+
+  .navigation>li {
+    width: 30%;
+  }
+
+  .singleLink {
+    display: none;
+  }
+
+  .logo {
+    height: 20px;
+    width: 20px;
+    margin: 0.5rem;
+    margin-top: 1.1rem;
+    padding: 10px;
+  }
+}
 </style>

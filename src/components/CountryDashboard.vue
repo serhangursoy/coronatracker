@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="container">
   <h3 class="topMargin newText noBottomMargin"> {{ this.getTranslation("information.title") }}</h3>
   <span class="dateAligner newText">
     <h4>{{this.getTranslation("information.date")}}: </h4>
@@ -40,7 +40,7 @@
     </div>
   </div>
   <div class="tableTitlePanel">
-    <div> <input v-model="searchedWord" :placeholder='this.getTranslation("information.search")' > </div>
+    <div> <input v-model="searchedWord" :placeholder='this.getTranslation("information.search")'> </div>
   </div>
   <div id="table_move_header" ref="table_move_header" class="tableHeader" :style="myStyle" :class="{'adjustMove': isHeaderSticked}">
     <div class="tableHeaderCell" v-on:click="sortBy('Country', false)" :class="{ activeSorting: isActive('Country') }">
@@ -93,19 +93,19 @@ export default {
     },
     getCurrentDateInHumanFormat() {
       if (this.originalData.Date) {
-      let date = new Date(this.originalData.Date);
+        let date = new Date(this.originalData.Date);
         var yyyy = date.getFullYear();
         var mm = date.getMonth() < 9 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1); // getMonth() is zero-based
         var dd = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
         var hh = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
         var min = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
         return "".concat(yyyy + "-" + mm + "-" + dd + "  ").concat(hh).concat(":").concat(min);
-      }else {
+      } else {
         return ""
       }
     },
-    isActive( askedType ){
-      if( this.sortedBy == askedType ) return true;
+    isActive(askedType) {
+      if (this.sortedBy == askedType) return true;
       else return false;
     },
     sortBy(requestedType, isNumeric = true) {
@@ -122,6 +122,13 @@ export default {
       }
       this.originalData.Countries.sort(sortFunc);
       this.sortedBy = requestedType;
+    },
+    isMobile() {
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        return true
+      } else {
+        return false
+      }
     }
   },
   data() {
@@ -141,7 +148,7 @@ export default {
   },
   watch: {
     scrollY(newValue) {
-      if (newValue < this.originalTop + this.top * 4) {
+      if (newValue < this.originalTop + this.top * 4 || this.isMobile()) {
         this.$delete(this.myStyle, 'top');
         this.isHeaderSticked = false;
         return;
@@ -269,7 +276,7 @@ export default {
   border-top-right-radius: 27px;
 }
 
-.activeSorting{
+.activeSorting {
   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   border-top-left-radius: 27px;
@@ -282,7 +289,7 @@ export default {
   box-shadow: none;
 }
 
-.dateAligner{
+.dateAligner {
   display: inline-flex;
   width: 100%;
   align-items: center;
@@ -290,11 +297,11 @@ export default {
   justify-content: center;
 }
 
-.newText{
+.newText {
   font-family: 'Oxygen', sans-serif !important;
 }
 
-.bold{
+.bold {
   font-weight: bold
 }
 
@@ -313,7 +320,7 @@ button:focus {
   margin-top: 2%;
 }
 
-.noBottomMargin{
+.noBottomMargin {
   margin-bottom: 0;
 }
 
@@ -323,4 +330,61 @@ button:focus {
 }
 
 
+@media only screen and (max-width: 600px) {
+  .topInfoPanel {
+    display: flex;
+    flex-flow: wrap;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .tableHeader,
+  .tableTitlePanel {
+    margin: 0
+  }
+
+  .separator {
+    margin: 0;
+    padding: 0;
+    width: 0;
+  }
+
+  .tableHeader {
+    overflow: scroll hidden;
+    width: 100%
+  }
+
+  .tableTitlePanel {
+    margin-top: 1rem;
+    margin-bottom: 5rem;
+  }
+
+  .tableHeaderCell>h3 {
+    font-size: 0.5rem;
+  }
+
+  .container {
+    margin: 0 2rem;
+  }
+
+  .subInfo {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border: none;
+    width: 37%;
+  }
+
+  .subInfo i,
+  .subInfo h3 {
+    font-size: 0.8rem;
+  }
+
+  .activeSorting {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    background: #0070f3;
+    color: white;
+  }
+}
 </style>

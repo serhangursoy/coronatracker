@@ -97,4 +97,28 @@ export default {
   border-radius: 1px;
   margin-right: 0.5rem;
 }
+
+@media only screen and (max-width: 600px) {
+  .countryHolder {
+    font-size: 0.5rem;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .countryFlag {
+    width: 25px;
+    height: 25px;
+    margin: 0;
+  }
+
+  .flagAligner {
+    display: block;
+  }
+
+  .countryName {
+    margin: 0;
+    font-size: 0.5rem;
+  }
+}
 </style>
