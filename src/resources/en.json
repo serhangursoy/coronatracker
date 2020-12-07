@@ -1,0 +1,19 @@
+{
+  "header": {
+    "title": "Case Tracker",
+    "api_doc": "API Document",
+    "github": "Github"
+  },
+  "information": {
+    "search": "Search",
+    "title": "Coronavirus World Statistics",
+    "date": "Date",
+    "Country": "Country",
+    "NewConfirmed": "New Confirmed",
+    "TotalConfirmed": "Total Confirmed",
+    "NewDeaths": "New Deaths",
+    "TotalDeaths": "Total Deaths",
+    "NewRecovered": "New Recovered",
+    "TotalRecovered": "Total Recovered"
+  }
+}

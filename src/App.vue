@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Header v-bind:theme="this.theme" title="Case Tracker" v-bind:links="this.links" />
-    <CountryDashboard v-bind:theme="this.theme" v-bind:caseData="this.info" :scrollY="this.scrollY" />
+    <Header v-bind:theme="this.theme" :title="title" v-bind:links="this.links" @languageUpdate="onLanguageUpdate" v-bind:language="this.languageCode" />
+    <CountryDashboard v-bind:theme="this.theme" v-bind:caseData="this.info" :scrollY="this.scrollY" v-bind:language="this.languageCode" />
   </div>
 </template>
 
@@ -27,8 +27,11 @@ export default {
     return {
       info: {},
       theme: ThemeColor,
-      links: [ { title: "API Development", url: "https://documenter.getpostman.com/view/10808728/SzS8rjbc"}],
-      scrollY: null
+      links: [ { title: "-", url: "https://documenter.getpostman.com/view/10808728/SzS8rjbc"},
+              { title: ".", url: "https://github.com/serhangursoy/coronatracker"}],
+      scrollY: null,
+      languageCode: "en",
+      title: "-"
     }
   },
   mounted(){
@@ -38,12 +41,25 @@ export default {
       this.scrollY = Math.round(window.scrollY);
     });
 
+    this.title = this.getTranslation("header.title");
+    this.links = [ { title: this.getTranslation("header.api_doc"), url: "https://documenter.getpostman.com/view/10808728/SzS8rjbc"},
+            { title: this.getTranslation("header.github"), url: "https://github.com/serhangursoy/coronatracker"}]
+
     axios
      .get('https://api.covid19api.com/summary')
      .then(response => {
       // console.log( "We have something",  response)
        self.info = response.data}
      )
+  },
+  methods: {
+    onLanguageUpdate( updatedLang ) {
+      this.languageCode = updatedLang;
+      this.language = updatedLang;
+      this.title = this.getTranslation("header.title");
+      this.links = [ { title: this.getTranslation("header.api_doc"), url: "https://documenter.getpostman.com/view/10808728/SzS8rjbc"},
+              { title: this.getTranslation("header.github"), url: "https://github.com/serhangursoy/coronatracker"}]
+    }
   }
 }
 </script>
@@ -59,5 +75,6 @@ export default {
 }
 
 li {list-style-type: none;}
+
 
 </style>

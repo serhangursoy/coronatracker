@@ -1,68 +1,68 @@
 <template>
 <div>
-  <h3 class="topMargin newText">Coronavirus World Statistics</h3>
+  <h3 class="topMargin newText noBottomMargin"> {{ this.getTranslation("information.title") }}</h3>
   <span class="dateAligner newText">
-    <h4>Date: </h4>
+    <h4>{{this.getTranslation("information.date")}}: </h4>
     <p style="margin-left: 10px"> {{ getCurrentDateInHumanFormat() }} </p>
   </span>
   <div v-if="this.caseData.Global" class="topInfoPanel">
     <div class="subInfo">
       <i class="lni lni-user icon bold" :style="getThemeColor('primary')"></i>
-      <h3 class="newText">New Confirmed</h3>
+      <h3 class="newText"> {{ this.getTranslation("information.NewConfirmed") }}</h3>
       <h3 class="newText"> {{ numberWithCommas(this.caseData.Global.NewConfirmed) }} </h3>
     </div>
     <div class="subInfo">
       <i class="lni lni-users icon" :style="getThemeColor('primary')"></i>
-      <h3 class="newText">Total Confirmed</h3>
+      <h3 class="newText">{{ this.getTranslation("information.TotalConfirmed") }}</h3>
       <h3 class="newText"> {{ numberWithCommas(this.caseData.Global.TotalConfirmed) }} </h3>
     </div>
     <span class='separator' />
     <div class="subInfo">
       <i class="lni lni-hospital icon bold" :style="getThemeColor('danger')"></i>
-      <h3 class="newText">New Deaths</h3>
+      <h3 class="newText">{{ this.getTranslation("information.NewDeaths") }}</h3>
       <h3 class="newText"> {{ numberWithCommas(this.caseData.Global.NewDeaths) }} </h3>
     </div>
     <div class="subInfo">
       <i class="lni lni-hospital icon" :style="getThemeColor('danger')"></i>
-      <h3 class="newText">Total Deaths</h3>
+      <h3 class="newText">{{ this.getTranslation("information.TotalDeaths") }}</h3>
       <h3 class="newText"> {{ numberWithCommas(this.caseData.Global.TotalDeaths) }} </h3>
     </div>
     <span class='separator' />
     <div class="subInfo">
       <i class="lni lni-pulse icon bold" :style="getThemeColor('success')"></i>
-      <h3 class="newText">New Recovered</h3>
+      <h3 class="newText">{{ this.getTranslation("information.NewRecovered") }}</h3>
       <h3 class="newText"> {{ numberWithCommas(this.caseData.Global.NewRecovered) }} </h3>
     </div>
     <div class="subInfo lastSubInfo">
       <i class="lni lni-pulse icon" :style="getThemeColor('success')"></i>
-      <h3 class="newText">Total Recovered</h3>
+      <h3 class="newText">{{ this.getTranslation("information.TotalRecovered") }}</h3>
       <h3 class="newText"> {{ numberWithCommas(this.caseData.Global.TotalRecovered) }} </h3>
     </div>
   </div>
   <div class="tableTitlePanel">
-    <div> <input v-model="searchedWord" placeholder="Search.."> </div>
+    <div> <input v-model="searchedWord" :placeholder='this.getTranslation("information.search")' > </div>
   </div>
   <div id="table_move_header" ref="table_move_header" class="tableHeader" :style="myStyle" :class="{'adjustMove': isHeaderSticked}">
     <div class="tableHeaderCell" v-on:click="sortBy('Country', false)" :class="{ activeSorting: isActive('Country') }">
-      <h3>Country</h3>
+      <h3>{{ this.getTranslation("information.Country") }}</h3>
     </div>
     <div class="tableHeaderCell" v-on:click="sortBy('NewConfirmed')" :class="{ activeSorting: isActive('NewConfirmed') }">
-      <h3>New Confirmed</h3>
+      <h3>{{ this.getTranslation("information.NewConfirmed") }}</h3>
     </div>
     <div class="tableHeaderCell" v-on:click="sortBy('TotalConfirmed')" :class="{ activeSorting: isActive('TotalConfirmed') }">
-      <h3>Total Confirmed</h3>
+      <h3>{{ this.getTranslation("information.TotalConfirmed") }}</h3>
     </div>
     <div class="tableHeaderCell" v-on:click="sortBy('NewDeaths')" :class="{ activeSorting: isActive('NewDeaths') }">
-      <h3>New Deaths</h3>
+      <h3>{{ this.getTranslation("information.NewDeaths") }}</h3>
     </div>
     <div class="tableHeaderCell" v-on:click="sortBy('TotalDeaths')" :class="{ activeSorting: isActive('TotalDeaths') }">
-      <h3>Total Deaths</h3>
+      <h3>{{ this.getTranslation("information.TotalDeaths") }}</h3>
     </div>
     <div class="tableHeaderCell" v-on:click="sortBy('NewRecovered')" :class="{ activeSorting: isActive('NewRecovered') }">
-      <h3>New Recovered</h3>
+      <h3>{{ this.getTranslation("information.NewRecovered") }}</h3>
     </div>
     <div class="tableHeaderCell" v-on:click="sortBy('TotalRecovered')" :class="{ activeSorting: isActive('TotalRecovered') }">
-      <h3>Total Recovered</h3>
+      <h3>{{ this.getTranslation("information.TotalRecovered") }}</h3>
     </div>
   </div>
   <ul class="reset">
@@ -311,6 +311,10 @@ button:focus {
 
 .topMargin {
   margin-top: 2%;
+}
+
+.noBottomMargin{
+  margin-bottom: 0;
 }
 
 .reset {

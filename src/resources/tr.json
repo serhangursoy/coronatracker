@@ -1,0 +1,19 @@
+{
+  "header": {
+    "title": "Vaka Takibi",
+    "api_doc": "API Dökümantasyonu",
+    "github": "Github"
+  },
+  "information": {
+    "search": "Ara",
+    "title": "Koronavirus Dünya İstatistikleri",
+    "date": "Tarih",
+    "Country": "Ülke",
+    "NewConfirmed": "Yeni Hasta",
+    "TotalConfirmed": "Toplam Hasta",
+    "NewDeaths": "Yeni Ölüm",
+    "TotalDeaths": "Toplam Ölüm",
+    "NewRecovered": "Yeni İyileşen",
+    "TotalRecovered": "Toplam İyileşen"
+  }
+}

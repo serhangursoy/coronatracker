@@ -1,13 +1,20 @@
 <template>
 <div class="header" :style="getThemeBackgroundColorAndShadow('primary')">
   <div class="inner_header">
-    <div class="logo_container">
+    <a class="logo_container" href="https://github.com/serhangursoy/coronatracker">
       <img :src="require(`@/assets/logo.png`)" class="logo" />
       <h1>{{ title }}</h1>
-    </div>
+    </a>
     <ul class="navigation">
-      <li v-for="link in this.links" :key="link.title">
+      <li v-for="link in this.links" :key="link.title" class="singleLink">
         <a v-bind:href="link.url"> {{ link.title }} </a>
+      </li>
+      <li v-if="this.langOptions" class="languageWrapper" >
+        <ul class="languageList">
+          <li v-for="langOption in this.langOptions" :key="langOption.key" >
+            <a @click="updateLanguage(langOption.key)"> <img :src="langOption.image" :class="{ activeLanguage: isActive(langOption.key) }"/></a>
+          </li>
+        </ul>
       </li>
     </ul>
   </div>
@@ -21,6 +28,31 @@ export default {
     title: String,
     links: Array,
     theme: Object
+  },
+  data() {
+    return {
+      langOptions: [{
+          key: "tr",
+          image: "https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/tr.svg"
+        },
+        {
+          key: "en",
+          image: "https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/us.svg"
+        }
+      ]
+    }
+  },
+  methods: {
+    updateLanguage(selected) {
+      this.$emit('languageUpdate', selected);
+    },
+    isActive( lang ){
+      if( this.language == lang ){
+        return true
+      } else {
+        return false
+      }
+    }
   }
 }
 </script>
@@ -31,15 +63,18 @@ export default {
   font-family: 'Oxygen', sans-serif !important;
 }
 
+
 .header {
   width: 100%;
   height: 80px;
   display: block;
-  overflow: hidden;
   transform: translate(0, 0);
   border-bottom-left-radius: 27px;
+  overflow: visible;
   border-bottom-right-radius: 27px;
 }
+
+
 
 .inner_header {
   width: 70%;
@@ -94,6 +129,7 @@ li {
 
 .navigation {
   float: right;
+  display: flex;
   height: 100%;
 }
 
@@ -106,6 +142,7 @@ li {
   -ms-transition: background-color 600ms linear, color 600ms linear, border-radius 900ms;
   transition: background-color 600ms linear, color 600ms linear, border-radius 900ms;
 }
+
 
 
 .navigation>li>a {
@@ -124,4 +161,31 @@ li {
   border-radius: 5px;
   box-shadow: 0px 2px 16px rgb(255 255 255 / 41%);
 }
+
+.singleLink {
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+.languageSelectWrapper{
+    width: 9rem;
+}
+
+.languageFlag {
+  width: 1rem;
+  height: 2rem;
+}
+
+.languageList{
+  width: 2rem;
+}
+
+.languageList a:hover {
+  cursor: pointer;
+}
+
+.activeLanguage{
+    box-shadow: 0px 2px 16px rgb(255 255 255 / 41%);
+}
+
 </style>
